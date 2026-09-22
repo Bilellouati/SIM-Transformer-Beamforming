@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Checkpoints
+*.hdf5
+*.h5
+
+# OS
+Thumbs.db
+.DS_Store
