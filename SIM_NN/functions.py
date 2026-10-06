@@ -1,13 +1,6 @@
 ###### Importing modules
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras.layers import Input, Dense, GaussianNoise, Lambda
-from tensorflow.keras.models import Model
-from tensorflow.python.ops.numpy_ops import np_config
 import matplotlib.pyplot as plt
-from tensorflow.keras import layers, optimizers
-from math import log
-from tensorflow.keras.callbacks import EarlyStopping
 from scipy.io import savemat, loadmat
 from math import *
 import random
@@ -166,7 +159,6 @@ def gradient_func(P, H, W1, K, L, N, wp, theta, Wl):
 
     for l in range(L):
         PHI[l, :, :] = np.diag(np.exp(np.zeros((1, N)) + 1j * theta[l])[0])
-    # Forward propagation G
     G = PHI[0, :, :]
     for l in range(1, L):
         G = np.matmul(np.matmul(PHI[l, :, :], Wl[l, :, :]), G)
