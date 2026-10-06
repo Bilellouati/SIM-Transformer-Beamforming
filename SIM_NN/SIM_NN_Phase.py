@@ -290,7 +290,7 @@ for i in range(Nch):
         signal = Pue * np.abs(hk @ G @ wk) ** 2
         interf = sum(Pue * np.abs(hk @ G @ W1[:, kp].reshape(N, 1)) ** 2
                      for kp in range(K) if kp != k) + wp
-        R.append(float(np.log2(1 + signal / interf)))
+        R.append(float(np.log2(1 + signal.flat[0] / interf.flat[0])))
     RR.append(R)
 
 # CDF of spectral efficiency
