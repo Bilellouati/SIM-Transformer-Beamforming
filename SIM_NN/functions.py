@@ -125,17 +125,18 @@ def generate_rice_channels(K, N, Nch, Betak, Rnn, K_factor):
     H = np.zeros((K, N, Nch), dtype=complex)
     Ht = np.zeros((N, K, Nch), dtype=complex)
     for k in range(0, K):
-        H[k, :, :] = (
+        H[k, :, :] = np.sqrt(Betak[k]) * (
             np.sqrt(K_factor / (1 + K_factor))
             + np.sqrt(1 / (1 + K_factor)) * (1 / np.sqrt(2)) * (np.random.randn(N, Nch) + 1j * np.random.randn(N, Nch))
         )
-        Ht[:, k, :] = (
+        Ht[:, k, :] = np.sqrt(Betak[k]) * (
             np.sqrt(K_factor / (1 + K_factor))
             + np.sqrt(1 / (1 + K_factor)) * (1 / np.sqrt(2)) * (np.random.randn(N, Nch) + 1j * np.random.randn(N, Nch))
         )
     for nc in range(0, Nch):
         H[:, :, nc] = H[:, :, nc].dot(Rnn)
-        Ht[:, :, nc] = Ht[:, :, nc].dot(Rnn)
+        test = (Ht[:, :, nc].T).dot(Rnn)
+        Ht[:, :, nc] = test.T
     H = np.complex64(H)
     Ht = np.complex64(Ht)
     return H, Ht
@@ -164,7 +165,7 @@ def gradient_func(P, H, W1, K, L, N, wp, theta, Wl):
         G = np.matmul(np.matmul(PHI[l, :, :], Wl[l, :, :]), G)
 
     delta = np.array([
-        (1 / (sum([P[k, k] * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, kpr], (N, 1))))) ** 2 for kpr in range(K) if kpr != k]) + wp))[0, 0]
+        (1 / (sum([P[k, k] * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, kpr], (N, 1))))) ** 2 for kpr in range(K) if kpr != k], np.zeros((1, 1))) + wp))[0, 0]
         for k in range(K)
     ])
 
@@ -198,7 +199,7 @@ def gradient_func(P, H, W1, K, L, N, wp, theta, Wl):
                 s1 = sum([P[kk, kk] * nu[l, n, k, kk] for kk in range(K) if kk != k])
                 Pk = P[k, k]
                 NU0num0 = (Pk * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, k], (N, 1))))) ** 2)[0, 0]
-                NU0den0 = (sum([Pk * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, kpr], (N, 1))))) ** 2 for kpr in range(K) if kpr != k]) + wp)[0, 0]
+                NU0den0 = (sum([Pk * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, kpr], (N, 1))))) ** 2 for kpr in range(K) if kpr != k], np.zeros((1, 1))) + wp)[0, 0]
                 gammak = np.log2(1 + (NU0num0 / NU0den0))
                 dR[l, n] = dR[l, n] + (1 / log(2) * delta[k] * (Pk * nu[l, n, k, k] - gammak * s1))
     return -dR
@@ -225,6 +226,6 @@ def objective_func(P, H, theta, W1, N, wp, Wl, B):
     for k in range(K):
         Pk = P[k, k]
         NU0num0 = (Pk * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, k], (N, 1))))) ** 2)[0, 0]
-        NU0den0 = (sum([Pk * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, kpr], (N, 1))))) ** 2 for kpr in range(K) if kpr != k]) + wp)[0, 0]
+        NU0den0 = (sum([Pk * np.abs(np.matmul(np.reshape(np.conjugate(H[k, :, 0]), (1, N)), np.matmul(G, np.reshape(W1[:, kpr], (N, 1))))) ** 2 for kpr in range(K) if kpr != k], np.zeros((1, 1))) + wp)[0, 0]
         Rk[k] = np.log2(1 + (NU0num0 / NU0den0))
     return Rk

@@ -1,0 +1,23 @@
+[400/8000] mean rate so far: 8.3883 bit/s/Hz
+[800/8000] mean rate so far: 8.4270 bit/s/Hz
+[1200/8000] mean rate so far: 8.4347 bit/s/Hz
+[1600/8000] mean rate so far: 8.4257 bit/s/Hz
+[2000/8000] mean rate so far: 8.4208 bit/s/Hz
+[2400/8000] mean rate so far: 8.3931 bit/s/Hz
+[2800/8000] mean rate so far: 8.4124 bit/s/Hz
+[3200/8000] mean rate so far: 8.4248 bit/s/Hz
+[3600/8000] mean rate so far: 8.4284 bit/s/Hz
+[4000/8000] mean rate so far: 8.4328 bit/s/Hz
+[4400/8000] mean rate so far: 8.4494 bit/s/Hz
+[4800/8000] mean rate so far: 8.4497 bit/s/Hz
+[5200/8000] mean rate so far: 8.4514 bit/s/Hz
+[5600/8000] mean rate so far: 8.4492 bit/s/Hz
+[6000/8000] mean rate so far: 8.4399 bit/s/Hz
+[6400/8000] mean rate so far: 8.4269 bit/s/Hz
+[6800/8000] mean rate so far: 8.4364 bit/s/Hz
+[7200/8000] mean rate so far: 8.4285 bit/s/Hz
+[7600/8000] mean rate so far: 8.4394 bit/s/Hz
+[8000/8000] mean rate so far: 8.4466 bit/s/Hz
+Done. Generated 8000 samples in 2662.3s (mean rate 8.4466, std 1.7563 bit/s/Hz)
+Saved dataset to sim_dataset_K1_L5_N49.mat
+Saved convergence plot to sim_dataset_convergence_K1_L5_N49.png

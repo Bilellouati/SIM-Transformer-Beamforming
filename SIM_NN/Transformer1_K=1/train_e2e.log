@@ -1,0 +1,27 @@
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:307: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Model: 766,442 parameters
+Epoch  25/300  train_rate=18.8895  val_rate=18.9498  best_val_rate=18.9498
+Epoch  50/300  train_rate=19.0758  val_rate=19.1262  best_val_rate=19.1262
+Epoch  75/300  train_rate=19.1870  val_rate=19.2203  best_val_rate=19.2203
+Epoch 100/300  train_rate=19.2480  val_rate=19.2671  best_val_rate=19.2701
+Epoch 125/300  train_rate=19.2410  val_rate=19.2630  best_val_rate=19.2762
+Epoch 150/300  train_rate=19.2677  val_rate=19.2829  best_val_rate=19.2847
+Epoch 175/300  train_rate=19.2744  val_rate=19.2896  best_val_rate=19.2906
+Epoch 200/300  train_rate=19.2786  val_rate=19.2945  best_val_rate=19.2945
+Epoch 225/300  train_rate=19.2823  val_rate=19.2981  best_val_rate=19.2985
+Epoch 250/300  train_rate=19.2858  val_rate=19.3013  best_val_rate=19.3013
+Epoch 275/300  train_rate=19.2871  val_rate=19.3029  best_val_rate=19.3029
+Epoch 300/300  train_rate=19.2890  val_rate=19.3031  best_val_rate=19.3031
+
+Best val rate (continuous, unquantized): 19.3031 bit/s/Hz
+
+Validation set (800 samples):
+  Classical optimizer  mean=8.2545  median=8.5793 bit/s/Hz
+  Transformer (end-to-end) mean=17.1531  median=17.1579 bit/s/Hz
+  Per-channel correlation (classical vs transformer rate): 0.0479
+
+Anti-collapse check: correlation between sample 0 and 1 predictions: 0.7473
+  OK: predictions vary across channels.
+
+Saved: transformer_K1_e2e_training_curve.png, transformer_K1_e2e_cdf.png, transformer_K1_e2e_scatter.png, transformer_K1_e2e_weights.pt, transformer_K1_e2e_eval.mat
