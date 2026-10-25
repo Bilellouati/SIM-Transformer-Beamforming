@@ -1,0 +1,20 @@
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:307: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Model: 766,442 parameters
+Epoch  25/500  train=1.55963  val=1.70297  best=1.64764
+Epoch  50/500  train=1.50112  val=1.73493  best=1.64764
+Early stopping at epoch 63
+
+Best val loss (cos/sin MSE): 1.64764
+
+Validation set (800 samples):
+  Classical optimizer  mean=8.2545  median=8.5793 bit/s/Hz
+  Transformer (student) mean=8.0254  median=8.3492 bit/s/Hz
+  Mean gap (classical - transformer): 0.2291 bit/s/Hz
+
+Anti-collapse check:
+  Std of predicted phase across samples (per element, avg): 0.0328 rad
+  Correlation between sample 0 and sample 1 predictions: 0.8465
+  OK: predictions vary meaningfully across different channels.
+
+Saved: transformer_K1_training_loss.png, transformer_K1_vs_classical_cdf.png, transformer_K1_weights.pt, transformer_K1_eval.mat
