@@ -1,0 +1,29 @@
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:307: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+Model: 766,442 parameters
+Training set: 18000 samples, K_factor range [0.00, 10.00]
+Validation set: 2000 samples, K_factor range [0.00, 10.00]
+Epoch  25/300  train_rate=19.1062  val_rate=19.1414  best_val_rate=19.1414
+Epoch  50/300  train_rate=19.2008  val_rate=19.2228  best_val_rate=19.2228
+Epoch  75/300  train_rate=19.2321  val_rate=19.2483  best_val_rate=19.2483
+Epoch 100/300  train_rate=19.2384  val_rate=19.2525  best_val_rate=19.2525
+Epoch 125/300  train_rate=19.2309  val_rate=19.2502  best_val_rate=19.2547
+Epoch 150/300  train_rate=19.2438  val_rate=19.2559  best_val_rate=19.2559
+Epoch 175/300  train_rate=19.2446  val_rate=19.2570  best_val_rate=19.2576
+Epoch 200/300  train_rate=19.2473  val_rate=19.2586  best_val_rate=19.2586
+Epoch 225/300  train_rate=19.2483  val_rate=19.2596  best_val_rate=19.2599
+Epoch 250/300  train_rate=19.2573  val_rate=19.2703  best_val_rate=19.2703
+Epoch 275/300  train_rate=19.2629  val_rate=19.2746  best_val_rate=19.2746
+Epoch 300/300  train_rate=19.2625  val_rate=19.2748  best_val_rate=19.2748
+
+Best val rate (continuous, unquantized): 19.2748 bit/s/Hz
+
+Validation set (2000 samples, K_factor in [0.00,10.00]):
+  Mean rate: 16.4130  Median: 16.4102 bit/s/Hz
+  K_factor in [0,2): n= 432  mean rate = 16.5003 bit/s/Hz
+  K_factor in [2,4): n= 396  mean rate = 16.3937 bit/s/Hz
+  K_factor in [4,6): n= 429  mean rate = 16.3879 bit/s/Hz
+  K_factor in [6,8): n= 357  mean rate = 16.3935 bit/s/Hz
+  K_factor in [8,10): n= 386  mean rate = 16.3810 bit/s/Hz
+
+Saved: transformer_multiKfactor_weights.pt, transformer_multiKfactor_results.mat, training_curve_multiKfactor.png, rate_vs_kfactor.png, rate_distribution_multiKfactor.png
