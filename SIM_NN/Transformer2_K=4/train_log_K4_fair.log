@@ -1,0 +1,29 @@
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:307: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+C:\Users\Lenovo\Documents\Bilel\Master_2_ICS_Rennes\M2 ICS  courses documents\IETR Projects\Project 2; SIM;Transformer-based Control of Stacked Intelligent\code pour aider\Codes\Codes\SIM_NN\Transformer2_K=4\train_transformer_K4.py:287: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([rates_tf[:, k] for k in range(K_users)], labels=[f"User {k+1}" for k in range(K_users)])
+Model: 804,074 parameters
+Users: K_users=4, meta-atoms per layer: N=49, layers: L=5
+Training set: 7200 samples
+Validation set: 800 samples
+Epoch  25/300  train_softmin=0.1844  val_softmin=0.1986  best_val_softmin=0.1986
+Epoch  50/300  train_softmin=0.2667  val_softmin=0.2339  best_val_softmin=0.2454
+Epoch  75/300  train_softmin=0.3235  val_softmin=0.2777  best_val_softmin=0.2827
+Epoch 100/300  train_softmin=0.3739  val_softmin=0.3088  best_val_softmin=0.3088
+Epoch 125/300  train_softmin=0.4357  val_softmin=0.3218  best_val_softmin=0.3315
+Epoch 150/300  train_softmin=0.4715  val_softmin=0.3386  best_val_softmin=0.3473
+Epoch 175/300  train_softmin=0.5004  val_softmin=0.3640  best_val_softmin=0.3640
+Epoch 200/300  train_softmin=0.5413  val_softmin=0.3630  best_val_softmin=0.3697
+Early stopping at epoch 220
+
+Best val soft-min (2-bit, quantization-aware, fairness training): 0.3697 bit/s/Hz
+
+Validation set (800 samples): mean SUM rate = 4.0648  median = 4.0322 bit/s/Hz
+
+Per-user mean rate:
+  User 1 (Betak=9.490e-09): mean rate = 1.0014 bit/s/Hz
+  User 2 (Betak=1.899e-09): mean rate = 0.9870 bit/s/Hz
+  User 3 (Betak=5.634e-10): mean rate = 1.0202 bit/s/Hz
+  User 4 (Betak=2.224e-10): mean rate = 1.0561 bit/s/Hz
+
+Saved: transformer_K4_weights.pt, transformer_K4_results.mat, training_curve_K4.png, sumrate_distribution_K4.png, peruser_rate_K4.png

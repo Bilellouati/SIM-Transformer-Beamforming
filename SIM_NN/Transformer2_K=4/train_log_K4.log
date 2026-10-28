@@ -1,0 +1,32 @@
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:307: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+C:\Users\Lenovo\Documents\Bilel\Master_2_ICS_Rennes\M2 ICS  courses documents\IETR Projects\Project 2; SIM;Transformer-based Control of Stacked Intelligent\code pour aider\Codes\Codes\SIM_NN\Transformer2_K=4\train_transformer_K4.py:247: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([rates_tf[:, k] for k in range(K_users)], labels=[f"User {k+1}" for k in range(K_users)])
+Model: 804,074 parameters
+Users: K_users=4, meta-atoms per layer: N=49, layers: L=5
+Training set: 7200 samples
+Validation set: 800 samples
+Epoch  25/300  train_sumrate=13.3535  val_sumrate=13.3193  best_val_sumrate=13.8178
+Epoch  50/300  train_sumrate=14.1707  val_sumrate=14.3977  best_val_sumrate=14.4339
+Epoch  75/300  train_sumrate=14.5280  val_sumrate=14.8242  best_val_sumrate=14.8242
+Epoch 100/300  train_sumrate=14.8357  val_sumrate=15.0130  best_val_sumrate=15.0130
+Epoch 125/300  train_sumrate=14.9808  val_sumrate=15.0877  best_val_sumrate=15.1634
+Epoch 150/300  train_sumrate=15.2065  val_sumrate=15.1849  best_val_sumrate=15.2840
+Epoch 175/300  train_sumrate=15.3149  val_sumrate=15.3201  best_val_sumrate=15.3653
+Epoch 200/300  train_sumrate=15.4173  val_sumrate=15.3893  best_val_sumrate=15.4260
+Epoch 225/300  train_sumrate=15.4909  val_sumrate=15.4545  best_val_sumrate=15.4583
+Epoch 250/300  train_sumrate=15.5436  val_sumrate=15.4830  best_val_sumrate=15.4830
+Epoch 275/300  train_sumrate=15.5704  val_sumrate=15.4950  best_val_sumrate=15.4960
+Epoch 300/300  train_sumrate=15.5763  val_sumrate=15.4982  best_val_sumrate=15.4984
+
+Best val sum rate (continuous): 15.4984 bit/s/Hz
+
+Validation set (800 samples): mean SUM rate = 2.3801  median = 2.3723 bit/s/Hz
+
+Per-user mean rate:
+  User 1 (Betak=9.490e-09): mean rate = 1.9486 bit/s/Hz
+  User 2 (Betak=1.899e-09): mean rate = 0.1274 bit/s/Hz
+  User 3 (Betak=5.634e-10): mean rate = 0.0992 bit/s/Hz
+  User 4 (Betak=2.224e-10): mean rate = 0.2049 bit/s/Hz
+
+Saved: transformer_K4_weights.pt, transformer_K4_results.mat, training_curve_K4.png, sumrate_distribution_K4.png, peruser_rate_K4.png
