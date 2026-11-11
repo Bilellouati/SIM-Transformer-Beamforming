@@ -44,6 +44,15 @@ Meeting_Bussgang/                          Reference material on the Bussgang th
 Each `Transformer*` folder contains its own `README.md` with methodology, results, and
 reproduction steps.
 
+## Environment
+
+```bash
+pip install torch numpy scipy matplotlib
+```
+Python 3.11; CPU-only PyTorch is sufficient, no GPU required. Every stage's trained
+weights and results are already included in the repository — see each chapter's
+`README.md` for the exact commands to retrain or reproduce them.
+
 ## Development history
 
 Each stage below was developed on its own branch and merged into `main` once validated,

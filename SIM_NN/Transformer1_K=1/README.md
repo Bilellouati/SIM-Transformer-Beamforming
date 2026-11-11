@@ -35,6 +35,8 @@ same level (~17.1 bit/s/Hz) on the same channels.
 ## How to reproduce
 
 ```bash
+pip install torch numpy scipy matplotlib   # Python 3.11, CPU-only PyTorch is enough
+
 # 1. Generate the dataset (channels + classical optimizer solutions)
 python generate_dataset.py
 
@@ -45,8 +47,10 @@ python train_transformer_K1.py
 python train_transformer_K1_endtoend.py
 ```
 
-Both training scripts expect `sim_dataset_K1_L5_N49.mat` in the same directory, and import shared
-physics functions from `SIM_NN/functions.py` (one level up).
+Run these from inside this folder (`SIM_NN/Transformer1_K=1/`). Both training scripts
+expect `sim_dataset_K1_L5_N49.mat` in the same directory, and import shared physics
+functions from `SIM_NN/functions.py` (one level up) automatically. All trained weights
+and results already exist in this folder; re-running will overwrite them.
 
 ## Next steps
 

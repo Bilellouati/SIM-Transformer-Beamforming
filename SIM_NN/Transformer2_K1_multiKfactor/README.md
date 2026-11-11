@@ -47,7 +47,12 @@ theta, rate), plus `rate_vs_kfactor_bitN.png` and `rate_distribution_bitN.png`.
 ## How to reproduce
 
 ```bash
+pip install torch numpy scipy matplotlib   # Python 3.11, CPU-only PyTorch is enough
+
 python generate_channels_multiKfactor.py      # ~1 second, 20,000 channels
 python train_transformer_multiKfactor.py      # ~30-45 minutes
 python eval_multibit.py                       # ~1 minute, reuses the trained model
 ```
+
+Run these from inside this folder (`SIM_NN/Transformer2_K1_multiKfactor/`). All trained
+weights and results already exist in this folder; re-running will overwrite them.

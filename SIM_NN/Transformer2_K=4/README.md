@@ -71,7 +71,19 @@ collapsed the same way as stage 2.
 
 ## How to reproduce
 ```bash
-python generate_channels_K4.py           # ~instant, 8000 channels
-python train_transformer_K4.py           # ~15-25 min (early stopping)
-python train_transformer_K4_powerctrl.py # ~20-30 min (early stopping)
+pip install torch numpy scipy matplotlib   # Python 3.11, CPU-only PyTorch is enough
+
+python generate_channels_K4.py             # ~instant, 8000 channels, 4 fixed users
+python train_transformer_K4.py             # stage 1/2 history (naive -> QAT + fairness), ~15-25 min
+
+# Stage 3 (final): joint phase + power control, one model per bit depth
+python train_transformer_K4_powerctrl.py 2 # our focus: 2-bit, ~20-30 min
+python train_transformer_K4_powerctrl.py 1 # repeat for bit = 1, 3, 4
+python train_transformer_K4_powerctrl.py 3
+python train_transformer_K4_powerctrl.py 4
+
+python make_comparison_K4.py               # builds the 1-4 bit comparison table/plots
 ```
+Run these from inside this folder (`SIM_NN/Transformer2_K=4/`) — output files are saved
+with relative paths. All trained weights and results already exist in this folder;
+re-running will overwrite them.
