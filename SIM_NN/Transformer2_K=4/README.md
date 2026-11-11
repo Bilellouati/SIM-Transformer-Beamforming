@@ -5,6 +5,32 @@ Dataset: fixed K_factor=1, fixed user positions (`channels_K4_N49.mat`, 8,000 Ri
 channel realizations, 7,200 train / 800 validation). No classical-optimizer labels
 needed (Method 2 only requires H).
 
+## Formulation
+
+The Transformer takes the channel matrices `H = {h_1, ..., h_K}` as input and outputs
+the per-layer SIM phase shifts `theta` (which build the cascaded matrix `G`) and the
+per-user power split `P = {P_1, ..., P_K}` (summing to the total power budget).
+
+**Per-user rate** (k = 1..K):
+```
+signal_k = P_k * |h_k^H . G . w_k|^2
+interf_k = sum_{k'!=k} P_k' * |h_k^H . G . w_k'|^2 + noise
+R_k = log2(1 + signal_k / interf_k)
+SumRate = sum_k R_k
+```
+Interference from user `k'` scales with `P_k'` (that user's own power), not `P_k` --
+the correct multi-user SINR formula under non-equal power allocation.
+
+**Training loss** (soft max-min fairness, not raw sum-rate):
+```
+loss = alpha * logsumexp(-R / alpha),   alpha = 0.3
+```
+As `alpha -> 0` this approaches `-min_k(R_k)`, so minimizing the loss maximizes the
+worst-served user's rate rather than the sum rate directly. This is what keeps
+per-user rates nearly equal despite the ~x43 near-far power imbalance between users
+-- a pure `-SumRate` loss was tried first and collapsed to one user taking 100% of
+the service (see stage 1 below).
+
 Three stages, each fixing a problem found by diagnosis in the previous one:
 
 ## 1. `train_transformer_K4.py` -- naive sum-rate, continuous-trained
