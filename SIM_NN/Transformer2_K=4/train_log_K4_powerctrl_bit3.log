@@ -1,0 +1,26 @@
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:307: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(f"enable_nested_tensor is True, but self.use_nested_tensor is False because {why_not_sparsity_fast_path}")
+=== Training with NbitQ=3 (8 phase levels) ===
+Model: 821,102 parameters (joint phase + power control)
+Users: K_users=4, meta-atoms per layer: N=49, layers: L=5
+Training set: 7200 samples
+Validation set: 800 samples
+Epoch  25/300  train_softmin=0.6715  val_softmin=0.6013  best_val_softmin=0.6013
+Epoch  50/300  train_softmin=1.0261  val_softmin=0.7478  best_val_softmin=0.7478
+Epoch  75/300  train_softmin=1.2106  val_softmin=0.7885  best_val_softmin=0.7885
+Epoch 100/300  train_softmin=1.3535  val_softmin=0.8001  best_val_softmin=0.8173
+Epoch 125/300  train_softmin=1.4654  val_softmin=0.7987  best_val_softmin=0.8342
+Epoch 150/300  train_softmin=1.5577  val_softmin=0.8125  best_val_softmin=0.8342
+Early stopping at epoch 151
+
+Best val soft-min (2-bit, joint phase+power, fairness training): 0.8342 bit/s/Hz
+
+Validation set (800 samples): mean SUM rate = 6.7786  median = 6.6788 bit/s/Hz
+
+Per-user mean rate and mean power share:
+  User 1 (Betak=9.490e-09): mean rate = 1.6887 bit/s/Hz, mean power share = 27.7%
+  User 2 (Betak=1.899e-09): mean rate = 1.6975 bit/s/Hz, mean power share = 28.2%
+  User 3 (Betak=5.634e-10): mean rate = 1.6795 bit/s/Hz, mean power share = 23.1%
+  User 4 (Betak=2.224e-10): mean rate = 1.7129 bit/s/Hz, mean power share = 21.0%
+
+Saved: transformer_K4_powerctrl_bit3_weights.pt, transformer_K4_powerctrl_bit3_results.mat, training_curve_K4_powerctrl_bit3.png, sumrate_distribution_K4_powerctrl_bit3.png, peruser_rate_K4_powerctrl_bit3.png, power_allocation_K4_bit3.png

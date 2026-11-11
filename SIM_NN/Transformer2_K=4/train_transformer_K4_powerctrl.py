@@ -67,8 +67,9 @@ K_users = int(meta["K"][0, 0]); N = int(meta["N"][0, 0])
 Nx = int(meta["Nx"][0, 0]); Ny = int(meta["Ny"][0, 0])
 M_total = H.shape[0]
 L = 5
-NbitQ = 2
+NbitQ = int(sys.argv[1]) if len(sys.argv) > 1 else 2
 Delta_theta = (2 * np.pi) / (2 ** NbitQ)
+print(f"=== Training with NbitQ={NbitQ} ({2**NbitQ} phase levels) ===")
 
 # ----------------------------- Physics (differentiable) -----------------------------
 PT = 10; PTl = 0.001 * (10 ** (PT / 10)); M_ant = K_users
@@ -282,42 +283,44 @@ for k in range(K_users):
           f"mean power share = {P_val_np[:, k].mean() / budget * 100:.1f}%")
 
 # ----------------------------- Plots -----------------------------
+tag = f"bit{NbitQ}"
+
 plt.figure(figsize=(7, 4))
 plt.plot([-l for l in train_losses], label="Train soft-min")
 plt.plot([-l for l in val_losses], label="Validation soft-min")
 plt.xlabel("Epoch"); plt.ylabel("Soft-min rate [bit/s/Hz]")
-plt.title("Training -- K=4, joint phase + power control (fairness)")
+plt.title(f"Training -- K=4, joint phase + power control, {NbitQ}-bit")
 plt.legend(); plt.grid(True, linestyle="--"); plt.tight_layout()
-plt.savefig("training_curve_K4_powerctrl.png", dpi=150)
+plt.savefig(f"training_curve_K4_powerctrl_{tag}.png", dpi=150)
 
 plt.figure(figsize=(7, 4))
 plt.hist(sumrate_tf, bins=50, color="steelblue")
 plt.xlabel("Sum rate [bit/s/Hz]"); plt.ylabel("Count")
-plt.title("Sum rate distribution -- K=4, joint phase + power (validation)")
+plt.title(f"Sum rate distribution -- K=4, joint phase + power, {NbitQ}-bit (validation)")
 plt.tight_layout()
-plt.savefig("sumrate_distribution_K4_powerctrl.png", dpi=150)
+plt.savefig(f"sumrate_distribution_K4_powerctrl_{tag}.png", dpi=150)
 
 plt.figure(figsize=(7, 4))
 plt.boxplot([rates_tf[:, k] for k in range(K_users)], tick_labels=[f"User {k+1}" for k in range(K_users)])
 plt.ylabel("Rate [bit/s/Hz]")
-plt.title("Per-user rate distribution -- K=4, joint phase + power (validation)")
+plt.title(f"Per-user rate distribution -- K=4, joint phase + power, {NbitQ}-bit (validation)")
 plt.grid(True, linestyle="--", axis="y"); plt.tight_layout()
-plt.savefig("peruser_rate_K4_powerctrl.png", dpi=150)
+plt.savefig(f"peruser_rate_K4_powerctrl_{tag}.png", dpi=150)
 
 plt.figure(figsize=(7, 4))
 plt.boxplot([P_val_np[:, k] / budget * 100 for k in range(K_users)], tick_labels=[f"User {k+1}" for k in range(K_users)])
 plt.ylabel("Power share [%]")
-plt.title("Per-user learned power allocation -- K=4 (validation)")
+plt.title(f"Per-user learned power allocation -- K=4, {NbitQ}-bit (validation)")
 plt.grid(True, linestyle="--", axis="y"); plt.tight_layout()
-plt.savefig("power_allocation_K4.png", dpi=150)
+plt.savefig(f"power_allocation_K4_{tag}.png", dpi=150)
 
 # ----------------------------- Save -----------------------------
-torch.save(model.state_dict(), "transformer_K4_powerctrl_weights.pt")
-savemat("transformer_K4_powerctrl_results.mat", {
+torch.save(model.state_dict(), f"transformer_K4_powerctrl_{tag}_weights.pt")
+savemat(f"transformer_K4_powerctrl_{tag}_results.mat", {
     "H": Hc_val.numpy(), "theta_predicted": thetas_q, "power_watts": P_val_np,
     "sum_rate": sumrate_tf, "per_user_rate": rates_tf,
-    "Betak": Betak, "val_idx": val_idx,
+    "Betak": Betak, "val_idx": val_idx, "NbitQ": NbitQ,
 })
-print("\nSaved: transformer_K4_powerctrl_weights.pt, transformer_K4_powerctrl_results.mat, "
-      "training_curve_K4_powerctrl.png, sumrate_distribution_K4_powerctrl.png, "
-      "peruser_rate_K4_powerctrl.png, power_allocation_K4.png")
+print(f"\nSaved: transformer_K4_powerctrl_{tag}_weights.pt, transformer_K4_powerctrl_{tag}_results.mat, "
+      f"training_curve_K4_powerctrl_{tag}.png, sumrate_distribution_K4_powerctrl_{tag}.png, "
+      f"peruser_rate_K4_powerctrl_{tag}.png, power_allocation_K4_{tag}.png")
