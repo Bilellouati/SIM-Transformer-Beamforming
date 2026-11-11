@@ -2,29 +2,69 @@
 
 ICS Master Project #2, Universite de Rennes — Supervision: Prof. Rafik Zayani.
 
-Learning-based controller for a Stacked Intelligent Metasurface (SIM): a Transformer
-predicts the per-layer phase-shift configuration directly from the channel state,
-using attention to capture interactions across SIM layers, under realistic hardware
-constraints (finite-resolution phase shifters).
+## Overview
 
-## Project timeline (chapters)
+A Stacked Intelligent Metasurface (SIM) is a cascade of programmable phase-shifting
+layers placed between a base station and its users, used to shape the propagation
+channel directly in the analog domain. This project develops a Transformer-based
+controller that predicts the per-layer phase-shift configuration directly from the
+channel state, using self-attention to capture interactions across SIM layers,
+subject to realistic hardware constraints such as finite-resolution phase shifters.
 
-Each stage below is a separate git branch, merged into `main` once validated.
-`main` always holds the latest, up-to-date state of the whole project.
+The controller is evaluated end-to-end: from a single user to multiple interfering
+users, across varying channel statistics, and across phase-quantization resolutions.
 
-| # | Branch | What it covers | Status |
+## Repository structure
+
+```
+SIM_NN/
+├── SIM_NN_Phase.py, SIM_NN_Phase_bis.py   Original SIM physics model and
+│                                           classical (non-learned) optimizer
+├── Transformer1_K=1/                      Stage 1 — first working single-user (K=1)
+│                                           Transformer controller: dataset generation,
+│                                           two training approaches, validated weights
+│                                           and results
+├── Transformer2_K1_multiKfactor/          Stage 2 — single-user generalization across
+│                                           Rician K-factor and user distance, plus a
+│                                           1-4 bit phase-quantization comparison
+│                                           (bit1/ … bit4/ subfolders; bit=2 is the
+│                                           project's standard operating resolution)
+└── Transformer2_K=4/                      Stage 3 — multi-user (K=4) controller with
+                                            inter-user interference, quantization-aware
+                                            training, max-min fairness, and jointly
+                                            learned per-user power allocation, evaluated
+                                            across the same 1-4 bit resolutions
+
+Meeting_Bussgang/                          Reference material on the Bussgang theorem
+                                            and PA-nonlinearity modeling (prior work,
+                                            relevant to the upcoming hardware-impairment
+                                            stage)
+```
+
+Each `Transformer*` folder contains its own `README.md` with methodology, results, and
+reproduction steps.
+
+## Development history
+
+Each stage below was developed on its own branch and merged into `main` once validated,
+so `main` always reflects the latest complete state of the project.
+
+| Stage | Branch | Summary | Status |
 |---|---|---|---|
-| 0 | `existed_work` | Professor's original SIM code (classical baseline, no learning) | done |
-| 1 | `K1-generalization` | Single-user (K=1) Transformer controller: dataset, training, validated against classical baseline; generalization across Rician K-factor and user distance; 1-4 bit phase-quantization comparison (bit=2 = standard resolution) | done |
-| 2 | `multiuser-K4-generalization` | Multi-user (K=4) extension: interference modeling, quantization-aware training, max-min fairness objective, jointly learned per-user power control, full 1-4 bit comparison | done |
-| 3 | *(next)* | Power-amplifier nonlinearity compensation | not started |
-| 4 | *(next)* | Benchmark vs. classical/conventional SIM optimizer (performance, robustness, computational complexity) | not started |
+| 0 | `existed_work` | Original SIM physics model and classical optimization baseline | complete |
+| 1 | `K1-generalization` | Single-user Transformer controller; generalization across channel K-factor and distance; phase-quantization comparison (1-4 bits) | complete |
+| 2 | `multiuser-K4-generalization` | Multi-user (K=4) extension with interference-aware training, fairness, and learned power control; full bit-resolution comparison | complete |
+| 3 | — | Power-amplifier nonlinearity compensation | planned |
+| 4 | — | Benchmark against a classical/conventional SIM optimizer (performance, robustness, computational complexity) | planned |
 
-## Repository layout
+## Key results
 
-- `SIM_NN/Transformer2_K1_multiKfactor/` — Chapter 1 code, results, and `README.md`.
-- `SIM_NN/Transformer2_K=4/` — Chapter 2 code, results, and `README.md`.
-- `SIM_NN/SIM_NN_Phase.py`, `SIM_NN_Phase_bis.py` — original/reference SIM physics and classical-optimization baseline (professor's code).
-- `Project_Overview.pdf`, `Project_Roadmap.pdf`, `Dataset_Report.pdf`, `SIM_Code_Problems_Report.pdf` — project documentation.
-
-See each chapter's own `README.md` for detailed results, methodology, and how to reproduce.
+- Single-user controller matches the classical optimizer's achievable rate while
+  running in a single forward pass.
+- Generalizes across Rician K-factor without retraining; rate degradation with user
+  distance follows the expected path-loss trend.
+- Multi-user controller maintains near-equal per-user rates despite a ~40x path-loss
+  imbalance between users, through a max-min fairness training objective combined
+  with jointly learned power allocation.
+- Consistent diminishing-returns behavior across phase-shifter resolutions (1-4 bits)
+  in both the single-user and multi-user settings.
