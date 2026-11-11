@@ -82,6 +82,7 @@ collapsed the same way as stage 2.
 | `train_transformer_K4_powerctrl.py` | Stage 3: joint phase + power control |
 | `diagnose_K4.py` | Quantization sensitivity + output-diversity (collapse) check |
 | `diagnose_K4_fairness.py` | Per-sample dominant-user check (fairness diagnosis) |
+| `test_channel_K4.py` | Runs a trained model on a given channel and reports phases, power allocation, and achieved rates |
 | `transformer_K4_weights.pt` / `transformer_K4_results.mat` | Stage 2 trained model and validation results |
 | `transformer_K4_powerctrl_weights.pt` / `transformer_K4_powerctrl_results.mat` | Stage 3 trained model and validation results |
 | `train_log_K4*.log` | Full training logs for each stage |
@@ -113,3 +114,26 @@ python make_comparison_K4.py               # builds the 1-4 bit comparison table
 Run these from inside this folder (`SIM_NN/Transformer2_K=4/`) — output files are saved
 with relative paths. All trained weights and results already exist in this folder;
 re-running will overwrite them.
+
+## Testing a custom channel
+
+`test_channel_K4.py` loads a trained model for a chosen bit depth and evaluates it on
+any given channel, without retraining.
+
+```bash
+# Quick check against an existing validation channel
+python test_channel_K4.py --bits 2 --index 0
+
+# Evaluate a custom channel from a .mat file with a variable H of shape
+# (4, 49) or (M, 4, 49), matching the convention used in channels_K4_N49.mat
+python test_channel_K4.py --bits 2 --mat your_channel.mat
+
+# Optionally save the result (phases, power, rates) to a .mat file
+python test_channel_K4.py --bits 2 --mat your_channel.mat --out results.mat
+```
+
+It prints the sum rate and, for each user, the achieved rate and allocated power.
+The channel normalization statistics used during training are not stored in the
+weights file, so they are recomputed deterministically from `channels_K4_N49.mat`
+with the training random seed, reproducing the exact same values every time. This
+has been verified to reproduce the saved validation results exactly.
