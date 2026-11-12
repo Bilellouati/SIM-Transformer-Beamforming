@@ -48,9 +48,6 @@ SEED = 0
 DATASET_FILE = "channels_Kgeneric_N49.mat"
 VAL_FRACTION = 0.1
 BATCH_SIZE = 192
-EPOCHS = 5000
-PATIENCE = 400
-LR = 1e-3
 D_MODEL, NUM_LAYERS, DROPOUT, WEIGHT_DECAY = 256, 4, 0.1, 1e-4
 K_VALUES = [1, 2, 3, 4]
 K_SAMPLE_WEIGHTS = np.array([1.0, 2.0, 3.0, 4.0])  # favor harder (higher-K) cases during training
@@ -61,11 +58,26 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--bits", type=int, default=2, choices=[1, 2, 3, 4])
 parser.add_argument("--device", type=str, default=None,
                      help="cuda or cpu (default: cuda if available)")
+parser.add_argument("--resume", type=str, default=None,
+                     help="Path to a .pt state_dict to warm-start from (fine-tuning run)")
+parser.add_argument("--alpha", type=float, default=0.3,
+                     help="Soft-min sharpness; lower = sharper focus on the per-sample worst user")
+parser.add_argument("--lr", type=float, default=1e-3)
+parser.add_argument("--epochs", type=int, default=5000)
+parser.add_argument("--patience", type=int, default=400)
+parser.add_argument("--out-suffix", type=str, default="",
+                     help="Appended to output filenames so a fine-tuning run doesn't overwrite the base one")
 args = parser.parse_args()
 NbitQ = args.bits
 DEVICE = torch.device(args.device) if args.device else torch.device(
     "cuda" if torch.cuda.is_available() else "cpu")
-print(f"=== Training K-agnostic model, NbitQ={NbitQ} ({2**NbitQ} phase levels), device={DEVICE} ===")
+SOFTMIN_ALPHA = args.alpha
+LR = args.lr
+EPOCHS = args.epochs
+PATIENCE = args.patience
+OUT_TAG = f"bit{NbitQ}{args.out_suffix}"
+print(f"=== Training K-agnostic model, NbitQ={NbitQ} ({2**NbitQ} phase levels), device={DEVICE}, "
+      f"alpha={SOFTMIN_ALPHA}, lr={LR}, resume={args.resume} ===")
 
 torch.manual_seed(SEED)
 np.random.seed(SEED)
@@ -121,9 +133,6 @@ for K in range(1, 5):
     D1_K = distance_BS_Layer(N, K, 7, 7, lamda, d_layer)
     W1_K = transmission_vector(N, K, d_layer, dx, dy, D1_K, lamda)
     W1_t_by_K[K] = torch.tensor(W1_K, dtype=torch.complex64, device=DEVICE)
-
-SOFTMIN_ALPHA = 0.3
-
 
 class _STEQuant(torch.autograd.Function):
     @staticmethod
@@ -225,6 +234,9 @@ def make_batch_X(H_K, idx_batch, K):
 
 
 model = SIMTransformerKGeneric(N, L, d_model=D_MODEL, num_layers=NUM_LAYERS, dropout=DROPOUT).to(DEVICE)
+if args.resume:
+    model.load_state_dict(torch.load(args.resume, map_location=DEVICE))
+    print(f"Warm-started from {args.resume}")
 optimizer = torch.optim.Adam(model.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=EPOCHS)
 n_params = sum(p.numel() for p in model.parameters())
@@ -286,7 +298,7 @@ for epoch in range(EPOCHS):
         best_val = vscore
         best_state = {k: v.clone() for k, v in model.state_dict().items()}
         patience_cnt = 0
-        torch.save(best_state, f"transformer_Kgeneric_bit{NbitQ}_weights.pt.ckpt")
+        torch.save(best_state, f"transformer_Kgeneric_{OUT_TAG}_weights.pt.ckpt")
     else:
         patience_cnt += 1
 
@@ -326,7 +338,7 @@ with torch.no_grad():
                   f"mean power share = {P_val[:, k].mean() / budget_for_K(K) * 100:.1f}%")
 
 # ----------------------------- Plots -----------------------------
-tag = f"bit{NbitQ}"
+tag = OUT_TAG
 
 plt.figure(figsize=(7, 4))
 plt.plot([-l for l in train_losses], label="Train soft-min (random K per batch)")
