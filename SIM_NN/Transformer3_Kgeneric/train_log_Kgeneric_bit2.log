@@ -1,0 +1,126 @@
+=== Training K-agnostic model, NbitQ=2 (4 phase levels), device=cuda ===
+C:\Users\Lenovo\AppData\Local\Programs\Python\Python311\Lib\site-packages\torch\nn\modules\transformer.py:385: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+Model: 3,633,643 parameters (K-agnostic, per-user tokens + aggregator)
+K values trained on: [1, 2, 3, 4], meta-atoms per layer: N=49, layers: L=5
+  K=1: 27000 train / 3000 val samples
+  K=2: 27000 train / 3000 val samples
+  K=3: 27000 train / 3000 val samples
+  K=4: 27000 train / 3000 val samples
+Epoch  10/5000  train_softmin=2.0869  val worst-K=-0.1710  best_worst-K=-0.0045  [K1=15.938  K2=0.652  K3=0.020  K4=-0.171]
+Epoch  20/5000  train_softmin=1.6696  val worst-K=-0.0139  best_worst-K=-0.0045  [K1=14.865  K2=0.741  K3=0.221  K4=-0.014]
+Epoch  30/5000  train_softmin=1.6122  val worst-K=-0.0162  best_worst-K=-0.0045  [K1=15.601  K2=0.772  K3=0.220  K4=-0.016]
+Epoch  40/5000  train_softmin=1.4991  val worst-K=-0.0138  best_worst-K=-0.0045  [K1=15.732  K2=0.769  K3=0.220  K4=-0.014]
+Epoch  50/5000  train_softmin=1.7162  val worst-K=-0.0125  best_worst-K=-0.0045  [K1=15.740  K2=0.770  K3=0.230  K4=-0.012]
+Epoch  60/5000  train_softmin=1.4418  val worst-K=-0.0052  best_worst-K=-0.0045  [K1=15.482  K2=0.777  K3=0.246  K4=-0.005]
+Epoch  70/5000  train_softmin=1.1565  val worst-K=-0.0186  best_worst-K=-0.0045  [K1=15.419  K2=0.793  K3=0.234  K4=-0.019]
+Epoch  80/5000  train_softmin=2.0148  val worst-K=-0.0201  best_worst-K=-0.0045  [K1=15.330  K2=0.885  K3=0.236  K4=-0.020]
+Epoch  90/5000  train_softmin=1.8730  val worst-K=-0.0095  best_worst-K=-0.0045  [K1=15.759  K2=0.909  K3=0.248  K4=-0.010]
+Epoch 100/5000  train_softmin=1.4767  val worst-K=-0.0211  best_worst-K=-0.0045  [K1=16.010  K2=0.949  K3=0.257  K4=-0.021]
+Epoch 110/5000  train_softmin=2.0504  val worst-K=-0.0195  best_worst-K=-0.0045  [K1=15.522  K2=1.287  K3=0.291  K4=-0.020]
+Epoch 120/5000  train_softmin=1.4123  val worst-K=0.0063  best_worst-K=0.0108  [K1=15.711  K2=1.144  K3=0.272  K4=0.006]
+Epoch 130/5000  train_softmin=1.7313  val worst-K=0.0201  best_worst-K=0.0201  [K1=16.208  K2=1.323  K3=0.293  K4=0.020]
+Epoch 140/5000  train_softmin=2.4310  val worst-K=0.0351  best_worst-K=0.0351  [K1=15.200  K2=1.550  K3=0.326  K4=0.035]
+Epoch 150/5000  train_softmin=1.4738  val worst-K=0.0282  best_worst-K=0.0474  [K1=16.368  K2=1.449  K3=0.327  K4=0.028]
+Epoch 160/5000  train_softmin=1.9120  val worst-K=0.0582  best_worst-K=0.0582  [K1=15.983  K2=1.502  K3=0.348  K4=0.058]
+Epoch 170/5000  train_softmin=2.4112  val worst-K=0.0576  best_worst-K=0.0664  [K1=16.184  K2=1.567  K3=0.325  K4=0.058]
+Epoch 180/5000  train_softmin=1.3831  val worst-K=0.0568  best_worst-K=0.0698  [K1=15.968  K2=1.679  K3=0.355  K4=0.057]
+Epoch 190/5000  train_softmin=1.8897  val worst-K=0.0636  best_worst-K=0.0705  [K1=16.251  K2=1.689  K3=0.344  K4=0.064]
+Epoch 200/5000  train_softmin=1.4870  val worst-K=0.0653  best_worst-K=0.0705  [K1=16.611  K2=1.544  K3=0.326  K4=0.065]
+Epoch 210/5000  train_softmin=1.8295  val worst-K=0.0746  best_worst-K=0.0827  [K1=16.198  K2=1.607  K3=0.323  K4=0.075]
+Epoch 220/5000  train_softmin=1.8991  val worst-K=0.0772  best_worst-K=0.0952  [K1=15.806  K2=1.748  K3=0.367  K4=0.077]
+Epoch 230/5000  train_softmin=2.4957  val worst-K=0.0870  best_worst-K=0.0960  [K1=16.128  K2=1.762  K3=0.361  K4=0.087]
+Epoch 240/5000  train_softmin=1.9940  val worst-K=0.0859  best_worst-K=0.0968  [K1=16.244  K2=1.862  K3=0.375  K4=0.086]
+Epoch 250/5000  train_softmin=2.3983  val worst-K=0.0903  best_worst-K=0.0968  [K1=16.589  K2=1.843  K3=0.389  K4=0.090]
+Epoch 260/5000  train_softmin=2.3303  val worst-K=0.0928  best_worst-K=0.1014  [K1=16.839  K2=1.825  K3=0.390  K4=0.093]
+Epoch 270/5000  train_softmin=1.7309  val worst-K=0.0735  best_worst-K=0.1014  [K1=16.490  K2=1.566  K3=0.370  K4=0.074]
+Epoch 280/5000  train_softmin=2.1919  val worst-K=0.0994  best_worst-K=0.1014  [K1=15.871  K2=1.576  K3=0.404  K4=0.099]
+Epoch 290/5000  train_softmin=2.4742  val worst-K=0.1075  best_worst-K=0.1075  [K1=16.982  K2=1.843  K3=0.395  K4=0.107]
+Epoch 300/5000  train_softmin=2.2127  val worst-K=-0.0917  best_worst-K=0.1075  [K1=16.178  K2=0.758  K3=0.152  K4=-0.092]
+Epoch 310/5000  train_softmin=1.6248  val worst-K=0.0926  best_worst-K=0.1075  [K1=16.112  K2=1.807  K3=0.386  K4=0.093]
+Epoch 320/5000  train_softmin=2.5837  val worst-K=0.1096  best_worst-K=0.1096  [K1=16.827  K2=1.841  K3=0.415  K4=0.110]
+Epoch 330/5000  train_softmin=2.0805  val worst-K=0.1046  best_worst-K=0.1096  [K1=17.304  K2=1.774  K3=0.410  K4=0.105]
+Epoch 340/5000  train_softmin=2.3792  val worst-K=0.0910  best_worst-K=0.1113  [K1=15.875  K2=1.867  K3=0.404  K4=0.091]
+Epoch 350/5000  train_softmin=2.3430  val worst-K=0.1066  best_worst-K=0.1113  [K1=16.107  K2=1.833  K3=0.413  K4=0.107]
+Epoch 360/5000  train_softmin=1.6659  val worst-K=0.0984  best_worst-K=0.1113  [K1=16.047  K2=1.800  K3=0.414  K4=0.098]
+Epoch 370/5000  train_softmin=2.7365  val worst-K=0.1058  best_worst-K=0.1113  [K1=16.619  K2=1.827  K3=0.404  K4=0.106]
+Epoch 380/5000  train_softmin=2.3698  val worst-K=0.0959  best_worst-K=0.1113  [K1=16.362  K2=1.730  K3=0.413  K4=0.096]
+Epoch 390/5000  train_softmin=3.3250  val worst-K=0.1140  best_worst-K=0.1140  [K1=16.652  K2=1.863  K3=0.405  K4=0.114]
+Epoch 400/5000  train_softmin=2.3716  val worst-K=0.0984  best_worst-K=0.1140  [K1=16.502  K2=1.852  K3=0.397  K4=0.098]
+Epoch 410/5000  train_softmin=2.3409  val worst-K=0.0956  best_worst-K=0.1140  [K1=15.397  K2=1.678  K3=0.395  K4=0.096]
+Epoch 420/5000  train_softmin=1.6928  val worst-K=0.0932  best_worst-K=0.1140  [K1=16.396  K2=1.823  K3=0.398  K4=0.093]
+Epoch 430/5000  train_softmin=1.9579  val worst-K=0.1042  best_worst-K=0.1140  [K1=16.609  K2=1.822  K3=0.403  K4=0.104]
+Epoch 440/5000  train_softmin=1.7402  val worst-K=0.1052  best_worst-K=0.1146  [K1=16.972  K2=1.894  K3=0.407  K4=0.105]
+Epoch 450/5000  train_softmin=1.7877  val worst-K=0.1054  best_worst-K=0.1146  [K1=17.116  K2=1.849  K3=0.419  K4=0.105]
+Epoch 460/5000  train_softmin=1.4875  val worst-K=0.0978  best_worst-K=0.1146  [K1=16.432  K2=1.870  K3=0.393  K4=0.098]
+Epoch 470/5000  train_softmin=2.9267  val worst-K=0.1039  best_worst-K=0.1146  [K1=16.641  K2=1.866  K3=0.416  K4=0.104]
+Epoch 480/5000  train_softmin=2.2094  val worst-K=0.0960  best_worst-K=0.1146  [K1=15.718  K2=1.782  K3=0.403  K4=0.096]
+Epoch 490/5000  train_softmin=1.8307  val worst-K=0.0991  best_worst-K=0.1183  [K1=16.511  K2=1.860  K3=0.390  K4=0.099]
+Epoch 500/5000  train_softmin=1.7926  val worst-K=0.0921  best_worst-K=0.1183  [K1=16.721  K2=1.893  K3=0.414  K4=0.092]
+Epoch 510/5000  train_softmin=1.8613  val worst-K=0.1029  best_worst-K=0.1183  [K1=16.174  K2=1.895  K3=0.417  K4=0.103]
+Epoch 520/5000  train_softmin=2.1479  val worst-K=0.0567  best_worst-K=0.1183  [K1=15.210  K2=1.807  K3=0.357  K4=0.057]
+Epoch 530/5000  train_softmin=2.2364  val worst-K=0.1148  best_worst-K=0.1183  [K1=16.505  K2=1.987  K3=0.432  K4=0.115]
+Epoch 540/5000  train_softmin=1.7850  val worst-K=0.1094  best_worst-K=0.1259  [K1=13.899  K2=2.055  K3=0.435  K4=0.109]
+Epoch 550/5000  train_softmin=1.8373  val worst-K=0.1152  best_worst-K=0.1362  [K1=15.139  K2=2.031  K3=0.420  K4=0.115]
+Epoch 560/5000  train_softmin=1.5449  val worst-K=0.1170  best_worst-K=0.1362  [K1=15.358  K2=2.037  K3=0.426  K4=0.117]
+Epoch 570/5000  train_softmin=2.8154  val worst-K=0.1165  best_worst-K=0.1362  [K1=14.243  K2=1.995  K3=0.434  K4=0.117]
+Epoch 580/5000  train_softmin=2.0842  val worst-K=0.1226  best_worst-K=0.1362  [K1=15.806  K2=1.988  K3=0.438  K4=0.123]
+Epoch 590/5000  train_softmin=1.9528  val worst-K=0.1173  best_worst-K=0.1362  [K1=16.492  K2=2.043  K3=0.437  K4=0.117]
+Epoch 600/5000  train_softmin=1.5166  val worst-K=0.1119  best_worst-K=0.1362  [K1=15.131  K2=1.943  K3=0.415  K4=0.112]
+Epoch 610/5000  train_softmin=2.1483  val worst-K=0.1237  best_worst-K=0.1362  [K1=15.352  K2=2.028  K3=0.434  K4=0.124]
+Epoch 620/5000  train_softmin=1.9256  val worst-K=0.1231  best_worst-K=0.1362  [K1=16.677  K2=1.953  K3=0.444  K4=0.123]
+Epoch 630/5000  train_softmin=1.9235  val worst-K=0.1217  best_worst-K=0.1362  [K1=16.023  K2=1.981  K3=0.434  K4=0.122]
+Epoch 640/5000  train_softmin=1.7337  val worst-K=0.1245  best_worst-K=0.1362  [K1=15.942  K2=2.038  K3=0.440  K4=0.124]
+Epoch 650/5000  train_softmin=1.6130  val worst-K=0.1215  best_worst-K=0.1362  [K1=15.571  K2=2.013  K3=0.432  K4=0.122]
+Epoch 660/5000  train_softmin=2.0096  val worst-K=0.1299  best_worst-K=0.1362  [K1=16.745  K2=2.017  K3=0.442  K4=0.130]
+Epoch 670/5000  train_softmin=1.9488  val worst-K=0.1197  best_worst-K=0.1362  [K1=15.447  K2=2.002  K3=0.431  K4=0.120]
+Epoch 680/5000  train_softmin=2.4734  val worst-K=0.1319  best_worst-K=0.1362  [K1=16.510  K2=2.015  K3=0.441  K4=0.132]
+Epoch 690/5000  train_softmin=2.3137  val worst-K=0.1172  best_worst-K=0.1362  [K1=15.943  K2=1.935  K3=0.419  K4=0.117]
+Epoch 700/5000  train_softmin=1.5779  val worst-K=0.1228  best_worst-K=0.1362  [K1=15.989  K2=2.018  K3=0.438  K4=0.123]
+Epoch 710/5000  train_softmin=2.2986  val worst-K=0.1191  best_worst-K=0.1362  [K1=16.340  K2=2.000  K3=0.424  K4=0.119]
+Epoch 720/5000  train_softmin=1.6001  val worst-K=0.1014  best_worst-K=0.1362  [K1=15.353  K2=1.908  K3=0.414  K4=0.101]
+Epoch 730/5000  train_softmin=1.6711  val worst-K=0.1215  best_worst-K=0.1362  [K1=16.079  K2=1.981  K3=0.429  K4=0.122]
+Epoch 740/5000  train_softmin=2.0688  val worst-K=0.1257  best_worst-K=0.1362  [K1=16.265  K2=1.979  K3=0.444  K4=0.126]
+Epoch 750/5000  train_softmin=2.3708  val worst-K=0.1185  best_worst-K=0.1362  [K1=16.317  K2=1.933  K3=0.434  K4=0.118]
+Epoch 760/5000  train_softmin=2.1211  val worst-K=0.1316  best_worst-K=0.1362  [K1=16.631  K2=2.017  K3=0.443  K4=0.132]
+Epoch 770/5000  train_softmin=2.8178  val worst-K=0.1227  best_worst-K=0.1362  [K1=15.600  K2=1.957  K3=0.424  K4=0.123]
+Epoch 780/5000  train_softmin=2.4586  val worst-K=0.1241  best_worst-K=0.1362  [K1=16.736  K2=2.026  K3=0.435  K4=0.124]
+Epoch 790/5000  train_softmin=1.7920  val worst-K=0.1253  best_worst-K=0.1362  [K1=16.798  K2=1.972  K3=0.430  K4=0.125]
+Epoch 800/5000  train_softmin=2.8800  val worst-K=0.1318  best_worst-K=0.1362  [K1=16.652  K2=2.010  K3=0.438  K4=0.132]
+Epoch 810/5000  train_softmin=2.0047  val worst-K=0.1191  best_worst-K=0.1362  [K1=16.797  K2=1.962  K3=0.434  K4=0.119]
+Epoch 820/5000  train_softmin=2.4974  val worst-K=0.1268  best_worst-K=0.1362  [K1=16.239  K2=1.991  K3=0.436  K4=0.127]
+Epoch 830/5000  train_softmin=1.8554  val worst-K=0.1289  best_worst-K=0.1362  [K1=16.525  K2=2.008  K3=0.440  K4=0.129]
+Epoch 840/5000  train_softmin=2.2430  val worst-K=0.1212  best_worst-K=0.1362  [K1=16.757  K2=2.035  K3=0.425  K4=0.121]
+Epoch 850/5000  train_softmin=2.8612  val worst-K=0.1147  best_worst-K=0.1362  [K1=15.624  K2=1.444  K3=0.414  K4=0.115]
+Epoch 860/5000  train_softmin=2.1165  val worst-K=0.1260  best_worst-K=0.1362  [K1=14.835  K2=2.010  K3=0.424  K4=0.126]
+Epoch 870/5000  train_softmin=2.3339  val worst-K=0.1210  best_worst-K=0.1362  [K1=16.705  K2=2.030  K3=0.424  K4=0.121]
+Epoch 880/5000  train_softmin=2.1442  val worst-K=0.1187  best_worst-K=0.1362  [K1=16.534  K2=2.097  K3=0.422  K4=0.119]
+Epoch 890/5000  train_softmin=2.0792  val worst-K=0.1233  best_worst-K=0.1362  [K1=16.679  K2=2.066  K3=0.428  K4=0.123]
+Epoch 900/5000  train_softmin=2.5142  val worst-K=0.1247  best_worst-K=0.1362  [K1=16.772  K2=2.029  K3=0.430  K4=0.125]
+Epoch 910/5000  train_softmin=3.1008  val worst-K=0.1204  best_worst-K=0.1362  [K1=16.184  K2=2.032  K3=0.438  K4=0.120]
+Epoch 920/5000  train_softmin=2.4721  val worst-K=0.1232  best_worst-K=0.1362  [K1=16.868  K2=1.969  K3=0.425  K4=0.123]
+Epoch 930/5000  train_softmin=3.0173  val worst-K=0.1212  best_worst-K=0.1362  [K1=16.905  K2=2.006  K3=0.431  K4=0.121]
+Epoch 940/5000  train_softmin=2.4388  val worst-K=0.1277  best_worst-K=0.1362  [K1=16.712  K2=2.014  K3=0.430  K4=0.128]
+Early stopping at epoch 948
+
+Best worst-case K soft-min rate (2-bit): 0.1362 bit/s/Hz
+
+K=1  (validation, 3000 samples): mean sum rate = 16.3061 bit/s/Hz
+  User 1: mean rate = 16.3061 bit/s/Hz, mean power share = 100.0%
+
+K=2  (validation, 3000 samples): mean sum rate = 6.1881 bit/s/Hz
+  User 1: mean rate = 3.0598 bit/s/Hz, mean power share = 50.0%
+  User 2: mean rate = 3.1283 bit/s/Hz, mean power share = 50.0%
+
+K=3  (validation, 3000 samples): mean sum rate = 3.1936 bit/s/Hz
+  User 1: mean rate = 0.8026 bit/s/Hz, mean power share = 33.3%
+  User 2: mean rate = 1.5177 bit/s/Hz, mean power share = 33.3%
+  User 3: mean rate = 0.8734 bit/s/Hz, mean power share = 33.3%
+
+K=4  (validation, 3000 samples): mean sum rate = 2.6384 bit/s/Hz
+  User 1: mean rate = 0.7067 bit/s/Hz, mean power share = 25.0%
+  User 2: mean rate = 0.6661 bit/s/Hz, mean power share = 25.0%
+  User 3: mean rate = 0.6396 bit/s/Hz, mean power share = 25.0%
+  User 4: mean rate = 0.6260 bit/s/Hz, mean power share = 25.0%
+
+Saved: transformer_Kgeneric_bit2_weights.pt, transformer_Kgeneric_bit2_results.mat, training_curve_Kgeneric_bit2.png, sumrate_by_K_bit2.png
